@@ -1,1 +1,1 @@
-from pyco import CoreNLP
+from pyco.pyco import CoreNLP
