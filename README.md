@@ -1,4 +1,4 @@
-# pyco-nlp
+# pyco
 ##CoreNLP v3.6.0
 ###Powerfull python wrapper for Stanford CoreNLP project
 - If user did not mention output format, use json - notify

@@ -1,6 +1,6 @@
 import os, logging
 try:
-    with open('pyco-nlp.cfg', 'r') as f:
+    with open('pyco.cfg', 'r') as f:
         conf = f.readlines()
         configuration_dict = dict(line.split('=') for line in conf)
 except FileNotFoundError:
