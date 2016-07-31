@@ -43,7 +43,7 @@ class CoreNLP:
         except requests.exceptions.ConnectionError:
             logging.error('Connection Error, check you have server running')
             raise Exception('Check your CoreNLP Server status \n'
-                'if not sure, Check the pyco doc for Server instantiation')
+                'if not sure, Check the pywrap doc for Server instantiation')
         if 'json' in out_format:
             server_out = r.json()
         elif 'text' in out_format:
