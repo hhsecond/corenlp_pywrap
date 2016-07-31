@@ -1,8 +1,6 @@
 # pyco-nlp
 ##CoreNLP v3.6.0
 ###Powerfull python wrapper for Stanford CoreNLP project
-- If user did not give url, take default
-- If user did not give annotator list, take all - give warning
 - If user did not mention output format, use json - notify
 - configuration for logging
 - function for fetching the standard output of stanford nlp
