@@ -9,4 +9,6 @@ del path
 from pyco_nlp import CoreNLP as cn
 
 def test_full_annotator_list_len():
-    assert len(cn.annotator_full_list) == 15, 'number of full annotator list has been changed'
+    assert len(cn.annotator_full_list) == 14, 'number of full annotator list has been changed, update __init__ '
+
+def test_
