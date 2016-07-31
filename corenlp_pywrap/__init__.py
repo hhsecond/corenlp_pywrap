@@ -1,0 +1,1 @@
+from corenlp_pywrap.pywrap import CoreNLP

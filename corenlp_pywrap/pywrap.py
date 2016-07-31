@@ -24,6 +24,7 @@ class CoreNLP:
             root.info('Using all the annotators')
         self.annotator_list = annotator_list
 
+
     def basic(self, data, out_format='json'):
         s_string = '/?properties={"annotators": "'
         anot_string = ','.join(self.annotator_list)
