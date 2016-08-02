@@ -1,10 +1,10 @@
 import requests, json, logging, sys
 
 root = logging.getLogger('Root')
-root.setLevel(logging.DEBUG)
+root.setLevel(logging.INFO)
 
 lhandler = logging.StreamHandler(sys.stdout)
-lhandler.setLevel(logging.DEBUG)
+lhandler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s [%(name)s]:%(levelname)s - %(message)s', '%Y-%m-%d %H:%M:%S')
 lhandler.setFormatter(formatter)
 root.addHandler(lhandler)
@@ -14,10 +14,14 @@ class CoreNLP:
     "lemma", "ner", "regexner", "truecase", "parse", "depparse", "dcoref", 
     "relation", "natlog", "quote"]
     url = 'http://corenlp.run'
+    #url = 'http://127.0.0.1:9000'
 
     def __init__(self, url=url, annotator_list=annotator_full_list):        
         assert url.upper().startswith('HTTP'), 'url string should be prefixed with http'
-        self.url = url
+        if url.endswith('/'):
+            self.url = url[:-1]
+        else:
+            self.url = url
 
         assert isinstance(annotator_list, list), "annotators can be passed only as a python list"
         if len(annotator_list) == 14:
@@ -36,16 +40,18 @@ class CoreNLP:
         assert out_format.upper() in format_list, 'output format not supported, check stanford doc'
         
         if out_format.upper() == 'SERIALIZED' and not serializer:
-            root.info('Default Serializer is using - edu.stanford.nlp.pipeline.CustomAnnotationSerializer')
-            serializer = 'edu.stanford.nlp.pipeline.CustomAnnotationSerializer'
+            root.info('Default Serializer is using - edu.stanford.nlp.pipeline.ProtobufAnnotationSerializer')
+            serializer = 'edu.stanford.nlp.pipeline.ProtobufAnnotationSerializer'
             
         s_string = '/?properties={"annotators": "'
         anot_string = ','.join(self.annotator_list)
-        f_string = '", "outputFormat": "' + out_format + '"}' 
-        current_url = self.url + s_string + anot_string + f_string
+        m_string = '", "outputFormat": "' + out_format
+        f_string = '", "serializer": "' + serializer + '"}'
+        current_url = self.url + s_string + anot_string + m_string + f_string
 
         assert isinstance(data, str) and data, 'Enter valid string input'
-
+        
+        root.debug('Trying: ' + current_url)
         try:
             server_out = requests.post(current_url, data, headers={'Connection': 'close'})
         except requests.exceptions.ConnectionError:
