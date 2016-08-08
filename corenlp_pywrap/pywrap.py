@@ -54,9 +54,18 @@ class CoreNLP:
             raise Exception('Check your CoreNLP Server status \n'
                 'if not sure, Check the pywrap doc for Server instantiation')
         return server_out
+    
+   
+    def url_calc(self, serializer=''):
+        s_string = '/?properties={"annotators": "'
+        anot_string = ','.join(self.annotator_list)
+        m_string = '", "outputFormat": "' + self.out_format
+        f_string = '", "serializer": "' + serializer + '"}'
+        return self.url + s_string + anot_string + m_string + f_string
 
 
     def basic(self, data, out_format='json', serializer=''):
+        self.out_format = out_format
         format_list = ['JSON', 'XML', 'TEXT', 'SERIALIZED']
         assert out_format.upper() in format_list, \
             'output format not supported, check stanford doc'
@@ -67,31 +76,26 @@ class CoreNLP:
                 'edu.stanford.nlp.pipeline.ProtobufAnnotationSerializer')
             serializer = ('edu.stanford.nlp.pipeline.'
                 'ProtobufAnnotationSerializer')
-            
-        s_string = '/?properties={"annotators": "'
-        anot_string = ','.join(self.annotator_list)
-        m_string = '", "outputFormat": "' + out_format
-        f_string = '", "serializer": "' + serializer + '"}'
-        current_url = self.url + s_string + anot_string + m_string + f_string
-
+                
+        current_url = self.url_calc(serializer)
         assert isinstance(data, str) and data, 'Enter valid string input'
         
         root.debug('Trying: ' + current_url)
         return self.server_connection(current_url, data)
 
-    
-    def tokensregex(self, data, pattern, custom_filter):
+    @staticmethod
+    def tokensregex(data, pattern, custom_filter):
         root.info('TokenRegex started')
-        return self.regex('/tokensregex', data, pattern, custom_filter)
+        return CoreNLP.regex('/tokensregex', data, pattern, custom_filter)
 
-
-    def semgrex(self, data, pattern, custom_filter):
+    @staticmethod
+    def semgrex(data, pattern, custom_filter):
         root.info('SemRegex started')
-        return self.regex('/semgrex', data, pattern, custom_filter)
+        return CoreNLP.regex('/semgrex', data, pattern, custom_filter)
 
-
-    def regex(self, endpoint, data, pattern, custom_filter):
+    @classmethod
+    def regex(cls, endpoint, data, pattern, custom_filter):
         url_string = '/?pattern=' + str(pattern) +'&filter=' + custom_filter 
-        current_url = self.url + endpoint + url_string
+        current_url = cls.url + endpoint + url_string
         root.info('Returning the data requested')
-        return self.server_connection(current_url, data)
+        return cls.server_connection(current_url, data)
