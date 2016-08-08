@@ -16,7 +16,7 @@ class CoreNLP:
     "lemma", "ner", "regexner", "truecase", "parse", "depparse", "dcoref", 
     "relation", "natlog", "quote"]
     #url = 'http://127.0.0.1:9000'
-    url = 'http://corenlp.run/'
+    url = 'http://corenlp.run'
 
     def __init__(self, url=url, annotator_list=annotator_full_list):        
         assert url.upper().startswith('HTTP'), \
@@ -84,12 +84,12 @@ class CoreNLP:
         return self.server_connection(current_url, data)
 
     @staticmethod
-    def tokensregex(data, pattern, custom_filter):
+    def tokensregex(data, pattern='', custom_filter=''):
         root.info('TokenRegex started')
         return CoreNLP.regex('/tokensregex', data, pattern, custom_filter)
 
     @staticmethod
-    def semgrex(data, pattern, custom_filter):
+    def semgrex(data, pattern='', custom_filter=''):
         root.info('SemRegex started')
         return CoreNLP.regex('/semgrex', data, pattern, custom_filter)
 
@@ -99,3 +99,15 @@ class CoreNLP:
         current_url = cls.url + endpoint + url_string
         root.info('Returning the data requested')
         return cls.server_connection(current_url, data)
+
+
+    def arrange(self, data):
+        self.out_format = 'json'
+        root.info('Executing custom function')
+        assert isinstance(data, str) and data, 'Enter valid string input'
+        if 'lemma' not in self.annotator_list:
+            self.annotator_list.append('lemma')
+        
+        current_url = self.url_calc()
+        r = self.server_connection(current_url, data)
+        return r
