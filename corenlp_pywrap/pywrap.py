@@ -15,7 +15,8 @@ class CoreNLP:
     annotator_full_list = ["tokenize", "cleanxml", "ssplit", "pos", 
     "lemma", "ner", "regexner", "truecase", "parse", "depparse", "dcoref", 
     "relation", "natlog", "quote"]
-    url = 'http://127.0.0.1:9000'
+    #url = 'http://127.0.0.1:9000'
+    url = 'http://corenlp.run/'
 
     def __init__(self, url=url, annotator_list=annotator_full_list):        
         assert url.upper().startswith('HTTP'), \
@@ -41,6 +42,8 @@ class CoreNLP:
         assertion_error = 'annotator not supported: ' + str(not_suprtd_elem)
         assert not not_suprtd_elem, assertion_error
 
+
+    @staticmethod
     def server_connection(current_url, data):
         try:
             server_out = requests.post(current_url, 
@@ -51,6 +54,7 @@ class CoreNLP:
             raise Exception('Check your CoreNLP Server status \n'
                 'if not sure, Check the pywrap doc for Server instantiation')
         return server_out
+
 
     def basic(self, data, out_format='json', serializer=''):
         format_list = ['JSON', 'XML', 'TEXT', 'SERIALIZED']
@@ -73,18 +77,21 @@ class CoreNLP:
         assert isinstance(data, str) and data, 'Enter valid string input'
         
         root.debug('Trying: ' + current_url)
-        return server_connection(current_url, data)
+        return self.server_connection(current_url, data)
+
     
     def tokensregex(self, data, pattern, custom_filter):
         root.info('TokenRegex started')
         return self.regex('/tokensregex', data, pattern, custom_filter)
 
+
     def semgrex(self, data, pattern, custom_filter):
         root.info('SemRegex started')
         return self.regex('/semgrex', data, pattern, custom_filter)
+
 
     def regex(self, endpoint, data, pattern, custom_filter):
         url_string = '/?pattern=' + str(pattern) +'&filter=' + custom_filter 
         current_url = self.url + endpoint + url_string
         root.info('Returning the data requested')
-        return server_connection(current_url, data)
+        return self.server_connection(current_url, data)
