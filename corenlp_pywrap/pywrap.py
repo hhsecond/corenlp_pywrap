@@ -1,4 +1,4 @@
-import requests, json, logging, sys
+import requests, logging, sys
 
 root = logging.getLogger('Root')
 root.setLevel(logging.INFO)
