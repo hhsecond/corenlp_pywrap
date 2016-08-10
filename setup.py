@@ -5,13 +5,9 @@ from setuptools import setup
 # Used for the long_description.  It's nice, because now 1) we have a top level
 # README file and 2) it's easier to type in the README file than to put a raw
 # string in below ...
-def read(fname):
-    with open(os.path.join(os.path.dirname(__file__), fname)) as f:
-        return '\n'.join(f.readlines())
-
 setup(
     name = "corenlp_pywrap",
-    version = "0.0.9",
+    version = "1.0.0",
     author = "hhsecond",
     author_email = "sherinct@live.com",
     description = ("A powerful python wraper for Stanford CoreNLP"),
@@ -19,11 +15,14 @@ setup(
     keywords = "stanford corenlp wrapper",
     install_requires=['requests'],
     url = "https://www.github.com/hhsecond/corenlp_pywrap",
-    download_url = "https://www.github.com/hhsecond/corenlp_pywrap/tarball/0.0.9",
+    download_url = "https://www.github.com/hhsecond/corenlp_pywrap/tarball/1.0.0",
     packages=['corenlp_pywrap'],
-    long_description=read('README.md'),
+    long_description='Production Ready version equiped with basic'\
+        'output fetch of stanfornlp and custom arrange function, '\
+        'for more Info - '\
+        'CheckItOut: https://github.com/hhsecond/corenlp_pywrap',
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Science/Research",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "License :: OSI Approved :: MIT License",
