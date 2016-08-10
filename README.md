@@ -2,7 +2,7 @@
 ##CoreNLP v3.6.0
 ###Powerfull python wrapper for Stanford CoreNLP project
 - Works only with python 3.x
-- Beta version equiped with basic output fetch of stanfornlp
+- Production Ready version equiped with basic output fetch of stanfornlp and custom arrange function
 - 
 ####Install
 >pip install corenlp_pywrap
@@ -24,3 +24,35 @@ Pywrap does not inherently support 'Sentiment' now as the downloadable server ve
 ```
 annotator_list = CoreNLP.full_annotator_list + ['sentiment']
 ```
+####Custom Function
+- arrange() can be used for getting formatted output
+- Format is given below
+```python
+token_dict = {
+'index':[],
+'truecaseText':[],
+'ner':[],
+'before':[],
+'originalText':[],
+'characterOffsetBegin':[],
+'lemma':[],
+'truecase':[],
+'pos':[],
+'characterOffsetEnd':[],
+'speaker':[],
+'word':[],
+'after':[]
+}
+```
+- arrange() would return token_dict which is in the above format.
+- arrange() would work only for 'sentences' now. More features like 'enhanceddependancies' are coming in future releases
+- Usage:
+```python
+from corenlp_pywrap import pywrap
+cn = pywrap.CoreNLP(url='http://localhost:9000', annotator_list=full_annotator_list)
+#full_annotator_list = ["tokenize", "cleanxml", "ssplit", "pos", "lemma", "ner", "regexner", "truecase", "parse", "depparse", "dcoref", "relation", "natlog", "quote"]
+
+#custom function
+token_dict = cn.arrange(data)
+
+#example out: token_dict['index'] would give you something like this - [1,2,3,4]
