@@ -128,10 +128,6 @@ class CoreNLP:
                 token_dict[key].append(val)
         return token_dict
 
-        @staticmethod
-        def process_corefs(coref):
-            pass
-
 
     def arrange(self, data):
         root.info('Executing custom function')
