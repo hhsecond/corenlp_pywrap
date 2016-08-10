@@ -4,7 +4,7 @@ root = logging.getLogger('Root')
 root.setLevel(logging.INFO)
 
 lhandler = logging.StreamHandler(sys.stdout)
-lhandler.setLevel(logging.INFO)
+lhandler.setLevel(logging.WARNING)
 formatter = logging.Formatter(
                 '%(asctime)s [%(name)s]:%(levelname)s - %(message)s',
                 '%Y-%m-%d %H:%M:%S')
@@ -138,6 +138,6 @@ class CoreNLP:
         current_url = self.url_calc()
         r = self.server_connection(current_url, data)
         r = r.json()
-        root.warning('return json object doesnt have two values')
+        root.debug('return json object doesnt have two values')
         rs = r['sentences']
         return self.process_sentences(rs)
