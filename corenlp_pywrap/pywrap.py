@@ -15,8 +15,10 @@ class CoreNLP:
     annotator_full_list = ["tokenize", "cleanxml", "ssplit", "pos", 
     "lemma", "ner", "regexner", "truecase", "parse", "depparse", "dcoref", 
     "relation", "natlog", "quote"]
-    #url = 'http://127.0.0.1:9000'
-    url = 'http://corenlp.run'
+    url = 'http://127.0.0.1:9000'
+    #url = 'http://corenlp.run'
+    out_format = 'json'
+    sentences = []
 
     def __init__(self, url=url, annotator_list=annotator_full_list):        
         assert url.upper().startswith('HTTP'), \
@@ -100,9 +102,38 @@ class CoreNLP:
         root.info('Returning the data requested')
         return cls.server_connection(current_url, data)
 
+    @staticmethod
+    def process_sentences(sentence):
+        assert isinstance(sentence, list), 'it should be a list'
+        assert len(sentence) == 1, 'assuming the lenght is one'
+        sent_dict = sentence[0]
+        tokens = sent_dict['tokens']
+        token_dict = {
+        'index':[],
+        'truecaseText':[],
+        'ner':[],
+        'before':[],
+        'originalText':[],
+        'characterOffsetBegin':[],
+        'lemma':[],
+        'truecase':[],
+        'pos':[],
+        'characterOffsetEnd':[],
+        'speaker':[],
+        'word':[],
+        'after':[]
+        }
+        for val in tokens:
+            for key, val in val.items():
+                token_dict[key].append(val)
+        return token_dict
+
+        @staticmethod
+        def process_corefs(coref):
+            pass
+
 
     def arrange(self, data):
-        self.out_format = 'json'
         root.info('Executing custom function')
         assert isinstance(data, str) and data, 'Enter valid string input'
         if 'lemma' not in self.annotator_list:
@@ -110,4 +141,7 @@ class CoreNLP:
         
         current_url = self.url_calc()
         r = self.server_connection(current_url, data)
-        return r
+        r = r.json()
+        root.warning('return json object doesnt have two values')
+        rs = r['sentences']
+        return self.process_sentences(rs)

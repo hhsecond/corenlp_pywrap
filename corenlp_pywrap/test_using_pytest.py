@@ -17,3 +17,22 @@ class Test_common():
 
 class Test_basic():
 	pass
+
+class Test_serverconnection():
+	sc_obj = p.CoreNLP()
+	cur_url = sc_obj.url_calc()
+	r = sc_obj.server_connection(cur_url, 'This is Sherin')
+	r = r.json()
+	
+	def test_return_type(self):
+		assert isinstance(self.r, dict), 'arrange function should return a'\
+		 'requests object which is convertable to dictionary'
+	
+	def test_r(self):
+		assert 'sentences' in self.r, 'value should be there'
+		assert 'corefs' in self.r, 'value should be there.'
+		assert len(self.r) == 2, 'should not have more than one value'
+
+	def test_sentences(self):
+		self.rs = self.r['sentences']
+		assert len(self.rs) == 1, 'only one list'
