@@ -127,7 +127,7 @@ class CoreNLP:
             for val in tokens:
 
                 #workaround to handle length inconsistancie with normalizedNER, rethink the logic
-                if 'ner' in val.values() and 'normalizedNER' not in val.values():
+                if 'ner' in val.keys() and 'normalizedNER' not in val.keys():
                     token_dict['normalizedNER'].append('')
                     
                 for key, val in val.items():
