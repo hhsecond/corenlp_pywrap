@@ -2,10 +2,13 @@
 ##CoreNLP v3.6.0
 ###Powerfull python wrapper for Stanford CoreNLP project
 - Works only with python 3.x
-- Production Ready version equiped with basic output fetch of stanfornlp and custom arrange function
-- 
+    
+###Pywrap Doc
+    
 ####Install
 >pip install corenlp_pywrap
+or
+>pip3 installl corenlp_pywrap
 
 ####Usage
 ```python
@@ -56,3 +59,18 @@ cn = pywrap.CoreNLP(url='http://localhost:9000', annotator_list=full_annotator_l
 token_dict = cn.arrange(data)
 
 #example out: token_dict['index'] would give you something like this - [1,2,3,4]
+```
+####Server Instantiation Error
+- If you don't have the CoreNLP server downloaded, please download the server [here](http://stanfordnlp.github.io/CoreNLP/download.html)
+- Make sure you have Jave 8+ version is installed
+- CD to the downloaded folder
+- Follow below commands
+```
+# Run the server using all jars in the current directory (e.g., the CoreNLP home directory)
+# port and timeout are optional
+java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer [port] [timeout]
+```
+- Verify the server instance in the browser
+> http://localhost:port/
+replace 'port' with the port number you have given. if you didn't give any port number, port would be 9000
+> http://localhost:9000/
