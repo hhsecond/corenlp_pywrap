@@ -73,6 +73,9 @@ token_dict = cn.arrange(data)
 java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer [port] [timeout]
 ```
 - Verify the server instance in the browser
+
 > http://localhost:port/
+
 replace 'port' with the port number you have given. if you didn't give any port number, port would be 9000
+
 > http://localhost:9000/
