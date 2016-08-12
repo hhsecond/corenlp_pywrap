@@ -17,7 +17,6 @@ class CoreNLP:
     "relation", "natlog", "quote"]
     url = 'http://127.0.0.1:9000'
     out_format = 'json'
-    sentences = []
 
     def __init__(self, url=url, annotator_list=annotator_full_list):        
         assert url.upper().startswith('HTTP'), \
@@ -102,11 +101,10 @@ class CoreNLP:
         return cls.server_connection(current_url, data)
 
     @staticmethod
-    def process_sentences(sentence):
-        assert isinstance(sentence, list), 'it should be a list'
-        assert len(sentence) == 1, 'assuming the lenght is one'
-        sent_dict = sentence[0]
-        tokens = sent_dict['tokens']
+    def process_sentences(sentences):
+        assert isinstance(sentences, list), 'it should be a list'
+        index = 0
+        new_index = 0
         token_dict = {
         'index':[],
         'truecaseText':[],
@@ -122,9 +120,16 @@ class CoreNLP:
         'word':[],
         'after':[]
         }
-        for val in tokens:
-            for key, val in val.items():
-                token_dict[key].append(val)
+        for sentence in sentences:
+            index = new_index
+            tokens = sentence['tokens']
+            for val in tokens:
+                for key, val in val.items():
+                    if key == 'index':
+                        new_index = index + int(val)
+                        token_dict[key].append(str(new_index))
+                    else:
+                        token_dict[key].append(val)
         return token_dict
 
 
