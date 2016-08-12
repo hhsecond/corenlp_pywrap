@@ -1,4 +1,6 @@
-# corenlp_pywrap
+# corenlp_pywrap 1.0.2
+Update your version for bug fixes and more features
+
 ##CoreNLP v3.6.0
 ###Powerfull python wrapper for Stanford CoreNLP project
 - Works only with python 3.x
@@ -79,3 +81,28 @@ java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer [port] [timeo
 replace 'port' with the port number you have given. if you didn't give any port number, port would be 9000
 
 > http://localhost:9000/
+
+####Debugging & Logging
+- Pywrap using logging module for logging and debugging.
+- Default logging level is set to 'warning'
+- If you need more verbose logs for debugging or logging purpose make changes to the logging values
+
+- Default log facilities
+```python
+root = logging.getLogger('Root')
+root.setLevel(logging.WARNING)
+
+lhandler = logging.StreamHandler(sys.stdout)
+formatter = logging.Formatter(
+                '%(asctime)s [%(name)s]:%(levelname)s - %(message)s',
+                '%Y-%m-%d %H:%M:%S')
+lhandler.setFormatter(formatter)
+root.addHandler(lhandler)
+```
+
+- You can modify each of them just like below given example
+```python
+import pywrap as p
+import logging
+p.root.setLevel(logging.DEBUG)
+```
