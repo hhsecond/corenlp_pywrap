@@ -7,7 +7,9 @@
     
 ####Install
 >pip install corenlp_pywrap
+
 or
+
 >pip3 installl corenlp_pywrap
 
 ####Usage
