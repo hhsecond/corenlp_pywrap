@@ -1,10 +1,9 @@
 import requests, logging, sys
 
 root = logging.getLogger('Root')
-root.setLevel(logging.INFO)
+root.setLevel(logging.WARNING)
 
 lhandler = logging.StreamHandler(sys.stdout)
-lhandler.setLevel(logging.WARNING)
 formatter = logging.Formatter(
                 '%(asctime)s [%(name)s]:%(levelname)s - %(message)s',
                 '%Y-%m-%d %H:%M:%S')
@@ -12,6 +11,7 @@ lhandler.setFormatter(formatter)
 root.addHandler(lhandler)
 
 class CoreNLP:
+    root.debug('Object instantiating..')
     annotator_full_list = ["tokenize", "cleanxml", "ssplit", "pos", 
     "lemma", "ner", "regexner", "truecase", "parse", "depparse", "dcoref", 
     "relation", "natlog", "quote"]
@@ -45,6 +45,7 @@ class CoreNLP:
 
     @staticmethod
     def server_connection(current_url, data):
+        root.debug('server connection: ' + current_url)
         try:
             server_out = requests.post(current_url, 
                                         data, 
@@ -80,7 +81,6 @@ class CoreNLP:
         current_url = self.url_calc(serializer)
         assert isinstance(data, str) and data, 'Enter valid string input'
         
-        root.debug('Trying: ' + current_url)
         return self.server_connection(current_url, data)
 
     @staticmethod
@@ -118,7 +118,8 @@ class CoreNLP:
         'characterOffsetEnd':[],
         'speaker':[],
         'word':[],
-        'after':[]
+        'after':[],
+        'normalizedNER':[]
         }
         for sentence in sentences:
             index = new_index
@@ -129,7 +130,11 @@ class CoreNLP:
                         new_index = index + int(val)
                         token_dict[key].append(str(new_index))
                     else:
-                        token_dict[key].append(val)
+                        try:
+                            token_dict[key].append(val)
+                        except KeyError:
+                            token_dict[key] = [val]
+                            root.info('key not found: ' + key)
         return token_dict
 
 
