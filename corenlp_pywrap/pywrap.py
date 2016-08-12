@@ -16,7 +16,6 @@ class CoreNLP:
     "lemma", "ner", "regexner", "truecase", "parse", "depparse", "dcoref", 
     "relation", "natlog", "quote"]
     url = 'http://127.0.0.1:9000'
-    #url = 'http://corenlp.run'
     out_format = 'json'
     sentences = []
 
