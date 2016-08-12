@@ -125,6 +125,11 @@ class CoreNLP:
             index = new_index
             tokens = sentence['tokens']
             for val in tokens:
+
+                #workaround to handle length inconsistancie with normalizedNER, rethink the logic
+                if 'ner' in val.values() and 'normalizedNER' not in val.values():
+                    token_dict['normalizedNER'].append('')
+                    
                 for key, val in val.items():
                     if key == 'index':
                         new_index = index + int(val)
