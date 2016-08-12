@@ -64,7 +64,7 @@ token_dict = cn.arrange(data)
 ```
 ####Server Instantiation Error
 - If you don't have the CoreNLP server downloaded, please download the server [here](http://stanfordnlp.github.io/CoreNLP/download.html)
-- Make sure you have Jave 8+ version is installed
+- Make sure you have Jave 8+ version installed
 - CD to the downloaded folder
 - Follow below commands
 ```
