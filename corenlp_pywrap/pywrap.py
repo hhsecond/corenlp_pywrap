@@ -5,7 +5,7 @@ root.setLevel(logging.WARNING)
 
 lhandler = logging.StreamHandler(sys.stdout)
 formatter = logging.Formatter(
-                '%(asctime)s [%(name)s]:%(levelname)s - %(message)s',
+                '%(asctime)s [%(levelname)s] : %(message)s',
                 '%Y-%m-%d %H:%M:%S')
 lhandler.setFormatter(formatter)
 root.addHandler(lhandler)
@@ -151,7 +151,10 @@ class CoreNLP:
         
         current_url = self.url_calc()
         r = self.server_connection(current_url, data)
-        r = r.json()
-        root.debug('return json object doesnt have two values')
-        rs = r['sentences']
+        try:
+            r = r.json()
+            rs = r['sentences']
+        except ValueError:
+            root.error('Value Error: '+r.text+', Check special chars in input')
+            rs = []
         return self.process_sentences(rs)
