@@ -1,12 +1,13 @@
 # corenlp_pywrap 1.0.2
-Update your version for bug fixes and more features
+######Powerfull python wrapper for Stanford CoreNLP project
+
+[![GitHub release](https://img.shields.io/badge/release-1.0.2-green.svg?maxAge=2592000)](https://github.com/hhsecond/corenlp_pywrap/releases/tag/1.0.2) [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/hhsecond/corenlp_pywrap/blob/master/LICENCE.txt) [![PyPI](https://img.shields.io/pypi/wheel/Django.svg?maxAge=2592000)](https://pypi.python.org/pypi/corenlp_pywrap)
+
 
 ##CoreNLP v3.6.0
-###Powerfull python wrapper for Stanford CoreNLP project
+- Update your version (both CoreNLP and corenlp_pywrap) for bug fixes and more features
 - Works only with python 3.x
 
-
-| [![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg?maxAge=2592000)](https://github.com/hhsecond/corenlp_pywrap/releases/tag/1.0.2) | [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/hhsecond/corenlp_pywrap/blob/master/LICENCE.txt) | [![PyPI](https://img.shields.io/pypi/wheel/Django.svg?maxAge=2592000)](https://pypi.python.org/pypi/corenlp_pywrap) | 
 
 ###Pywrap Doc
     
