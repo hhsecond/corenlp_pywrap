@@ -4,7 +4,10 @@ Update your version for bug fixes and more features
 ##CoreNLP v3.6.0
 ###Powerfull python wrapper for Stanford CoreNLP project
 - Works only with python 3.x
-    
+
+
+| [![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg?maxAge=2592000)](https://github.com/hhsecond/corenlp_pywrap/releases/tag/1.0.2) | [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/hhsecond/corenlp_pywrap/blob/master/LICENCE.txt) | [![PyPI](https://img.shields.io/pypi/wheel/Django.svg?maxAge=2592000)](https://pypi.python.org/pypi/corenlp_pywrap) | 
+
 ###Pywrap Doc
     
 ####Install
@@ -31,6 +34,7 @@ Pywrap does not inherently support 'Sentiment' now as the downloadable server ve
 ```
 annotator_list = CoreNLP.full_annotator_list + ['sentiment']
 ```
+    
 ####Custom Function
 - arrange() can be used for getting formatted output
 - Format is given below
@@ -64,6 +68,8 @@ token_dict = cn.arrange(data)
 
 #example out: token_dict['index'] would give you something like this - [1,2,3,4]
 ```
+
+    
 ####Server Instantiation Error
 - If you don't have the CoreNLP server downloaded, please download the server [here](http://stanfordnlp.github.io/CoreNLP/download.html)
 - Make sure you have Jave 8+ version installed
@@ -82,6 +88,8 @@ replace 'port' with the port number you have given. if you didn't give any port 
 
 > http://localhost:9000/
 
+
+    
 ####Debugging & Logging
 - Pywrap using logging module for logging and debugging.
 - Default logging level is set to 'warning'
@@ -102,7 +110,7 @@ root.addHandler(lhandler)
 
 - You can modify each of them just like below given example
 ```python
-import pywrap as p
+import corenlp_pywrap as cp
 import logging
-p.root.setLevel(logging.DEBUG)
+cp.pywrap.root.setLevel(logging.DEBUG)
 ```
