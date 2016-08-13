@@ -118,7 +118,8 @@ class CoreNLP:
         'characterOffsetEnd':[],
         'speaker':[],
         'word':[],
-        'after':[]
+        'after':[],
+        'normalizedNER':[]
         }
         for sentence in sentences:
             index = new_index
