@@ -118,8 +118,7 @@ class CoreNLP:
         'characterOffsetEnd':[],
         'speaker':[],
         'word':[],
-        'after':[],
-        'normalizedNER':[]
+        'after':[]
         }
         for sentence in sentences:
             index = new_index
@@ -139,7 +138,7 @@ class CoreNLP:
                             token_dict[key].append(val)
                         except KeyError:
                             token_dict[key] = [val]
-                            root.info('key not found: ' + key)
+                            root.info('New key added: ' + key)
         return token_dict
 
 
