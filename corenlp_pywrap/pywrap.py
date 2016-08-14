@@ -128,7 +128,7 @@ class CoreNLP:
 
                 #workaround to handle length inconsistancie with normalizedNER, rethink the logic
                 if 'ner' in val.keys() and 'normalizedNER' not in val.keys():
-                    token_dict['normalizedNER'].append('')
+                    token_dict['normalizedNER'].append(0)
                     
                 for key, val in val.items():
                     if key == 'index':
