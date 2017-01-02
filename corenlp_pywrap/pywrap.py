@@ -93,6 +93,11 @@ class CoreNLP:
         root.info('SemRegex started')
         return CoreNLP.regex('/semgrex', data, pattern, custom_filter)
 
+    @staticmethod
+    def tregex(data, pattern='', custom_filter=''):
+        root.info('Tregex started')
+        return CoreNLP.regex('/tregex', data, pattern, custom_filter)
+
     @classmethod
     def regex(cls, endpoint, data, pattern, custom_filter):
         url_string = '/?pattern=' + str(pattern) +'&filter=' + custom_filter 
