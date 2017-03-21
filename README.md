@@ -16,7 +16,7 @@
 
 or
 
->pip3 installl corenlp_pywrap
+>pip3 install corenlp_pywrap
 
 ####Usage
 ```python
