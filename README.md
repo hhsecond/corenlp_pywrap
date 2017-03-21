@@ -1,24 +1,24 @@
 # corenlp_pywrap 1.0.5
-######Powerfull python wrapper for Stanford CoreNLP project
+###### Powerfull python wrapper for Stanford CoreNLP project
 
 [![GitHub release](https://img.shields.io/badge/release-1.0.5-green.svg?maxAge=2592000)](https://github.com/hhsecond/corenlp_pywrap/releases) [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/hhsecond/corenlp_pywrap/blob/master/LICENCE.txt) [![PyPI](https://img.shields.io/pypi/wheel/Django.svg?maxAge=2592000)](https://pypi.python.org/pypi/corenlp_pywrap)
 
 
-##CoreNLP v3.6.0
+## CoreNLP v3.6.0
 - Update your version (both CoreNLP and corenlp_pywrap) for bug fixes and more features
 - Works only with python 3.x
 
 
-###Pywrap Doc
+### Pywrap Doc
     
-####Install
+#### Install
 >pip install corenlp_pywrap
 
 or
 
->pip3 installl corenlp_pywrap
+>pip3 install corenlp_pywrap
 
-####Usage
+#### Usage
 ```python
 from corenlp_pywrap import pywrap
 cn = pywrap.CoreNLP(url='http://localhost:9000', annotator_list=full_annotator_list)
@@ -36,7 +36,7 @@ Pywrap does not inherently support 'Sentiment' now as the downloadable server ve
 annotator_list = CoreNLP.full_annotator_list + ['sentiment']
 ```
     
-####Custom Function
+#### Custom Function
 - arrange() can be used for getting formatted output
 - Format is given below
 ```python
@@ -71,7 +71,7 @@ token_dict = cn.arrange(data)
 ```
 
     
-####Server Instantiation Error
+#### Server Instantiation Error
 - If you don't have the CoreNLP server downloaded, please download the server [here](http://stanfordnlp.github.io/CoreNLP/download.html)
 - Make sure you have Jave 8+ version installed
 - CD to the downloaded folder
@@ -91,7 +91,7 @@ replace 'port' with the port number you have given. if you didn't give any port 
 
 
     
-####Debugging & Logging
+#### Debugging & Logging
 - Pywrap using logging module for logging and debugging.
 - Default logging level is set to 'warning'
 - If you need more verbose logs for debugging or logging purpose make changes to the logging values
